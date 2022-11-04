@@ -1,0 +1,10 @@
+
+.header {
+   grid-area: header;
+   background-color: rgb(32, 247, 86);
+}
+ 
+.header img {
+   max-height: 100%;
+ }
+ 

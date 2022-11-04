@@ -1,0 +1,21 @@
+
+.navbar {
+   grid-area: nav-bar;
+   background-color: rgb(90, 212, 243);
+   color: #fff;
+ }
+
+ .link {
+   text-decoration: none;
+   color: #fff;
+   font-size: 22px;
+ }
+ 
+ .item {
+   margin: 0px 0px 10px 0px;
+ }
+ 
+ .list {
+   list-style: none;
+ }
+
