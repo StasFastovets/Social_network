@@ -1,5 +1,5 @@
 
-.navbar {
+.nav {
    grid-area: nav-bar;
    background-color: rgb(90, 212, 243);
    color: #fff;
@@ -10,12 +10,19 @@
    color: #fff;
    font-size: 22px;
  }
+
+ .active {
+  text-decoration: none;
+  font-size: 26px;
+  color: gold;
+ }
  
- .item {
+ .li {
    margin: 0px 0px 10px 0px;
  }
  
- .list {
+ .ul {
    list-style: none;
  }
 
+ 

@@ -1,14 +1,15 @@
-import nav from './Navbar.module.css';
+import { NavLink } from 'react-router-dom';
+import item from './Navbar.module.css';
 
 const Navigation = () => {
    return (
-      <nav className={nav.navbar}>
-         <ul className={nav.list}>
-            <li className={nav.item}><a className={nav.link} href="#">Profile</a></li>
-            <li className={nav.item}><a className={nav.link} href="#">Messages</a></li>
-            <li className={nav.item}><a className={nav.link} href="#">News</a></li>
-            <li className={nav.item}><a className={nav.link} href="#">Music</a></li>
-            <li className={nav.item}><a className={nav.link} href="#">Settings</a></li>
+      <nav className={item.nav}>
+         <ul className={item.ul}>
+            <li className={item.li}><NavLink className={itemData => itemData.isActive ? item.active : item.link} to="/profile">Profile</NavLink></li>
+            <li className={item.li}><NavLink className={itemData => itemData.isActive ? item.active : item.link} to="/dialogs">Messages</NavLink></li>
+            <li className={item.li}><NavLink className={itemData => itemData.isActive ? item.active : item.link} to="/news">News</NavLink></li>
+            <li className={item.li}><NavLink className={itemData => itemData.isActive ? item.active : item.link} to="/music">Music</NavLink></li>
+            <li className={item.li}><NavLink className={itemData => itemData.isActive ? item.active : item.link} to="/settings">Settings</NavLink></li>
          </ul>
       </nav >
    )
