@@ -3,10 +3,11 @@ import Posts from './posts/Posts';
 import './Profile.css'
 
 const Profile = (props) => {
+
    return (
       <div className="profile">
          <Info />
-         <Posts post = {props.post}/>
+         <Posts post = {props.post} addPost = {props.addPost} updatePostText = {props.updatePostText}/>
       </div>
    )
 }
