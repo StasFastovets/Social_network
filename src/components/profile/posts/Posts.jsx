@@ -5,7 +5,7 @@ import React from 'react';
 
 
 const Posts = (props) => {
-
+   
    let postItems = props.post.posts.map(elem => <Post message={elem.message} likes={elem.likes} />);
 
    let linkItem = React.createRef();

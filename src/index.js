@@ -1,24 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
-import state, { updatePostText } from './state';
-import { addPost, rewrite } from './state';
+import store from './state';
 import App from './App';
 import './index.css';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const rerenderEntireTree = (state) => {
+const rerenderEntireTree = () => {
   root.render(
     <React.StrictMode>
-      <App data={state} addPost={addPost} updatePostText={updatePostText}/>
+      <App data={store.getState()} addPost={store.addPost.bind(store)} updatePostText={store.updatePostText.bind(store)}/>
     </React.StrictMode>
   );
 }
 
 
-rewrite(rerenderEntireTree)
-rerenderEntireTree(state)
+store.rewrite(rerenderEntireTree)
+store.rerenderEntireTree()
 
 reportWebVitals();
 
