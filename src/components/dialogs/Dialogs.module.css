@@ -54,6 +54,22 @@
    text-decoration: none;
 }
 
-.body {
-
+.form {
+   display: block;
+   width: 50%;
+   margin: 100px 0;
+   position: relative;
+}
+.text_area {
+   display: block;
+   margin: 0px 0px 20px 0px;
+   height: 80px;
+   width: 100%;
+}
+.button {
+   display: block;
+   width: 140px;
+   height: 40px;
+   position: absolute;
+   right: 0;
 }

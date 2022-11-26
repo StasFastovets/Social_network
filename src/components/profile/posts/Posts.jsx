@@ -2,22 +2,24 @@ import Post from './one_post/One_post';
 import item from './Posts.module.css'
 import postData from './../../../index';
 import React from 'react';
+import { changePostActionCreator, viewPostActionCreator } from '../../../redux/profile_reducer';
 
 
 const Posts = (props) => {
-   
+
    let postItems = props.post.posts.map(elem => <Post message={elem.message} likes={elem.likes} />);
 
    let linkItem = React.createRef();
 
    const viewPost = () => {
-      props.addPost();
+      props.dispatch(viewPostActionCreator());
    }
 
-   const changePost = () => { 
+   const changePost = () => {
       let text = linkItem.current.value;
-      props.updatePostText(text);
-    }
+      let actionCreator = changePostActionCreator(text)
+      props.dispatch(actionCreator);
+   }
 
    return (
       <div className={item.posts}>
