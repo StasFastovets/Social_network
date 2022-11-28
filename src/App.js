@@ -3,10 +3,10 @@ import './App.css';
 import Header from './components/header/Header';
 import Navigation from './components/navbar/Navbar';
 import Profile from './components/profile/Profile';
-import Dialog from './components/dialogs/Dialogs';
 import News from './components/news/News';
 import Music from './components/music/Music';
 import Settings from './components/settings/Settings';
+import DialogsContainer from './components/dialogs/Dialogs_container';
 
 const App = (props) => {
 
@@ -15,8 +15,8 @@ const App = (props) => {
       <Header />
       <Navigation />
       <Routes>
-        <Route path='/profile' element={<Profile post={props.data.profilePage} dispatch={props.dispatch} />} />
-        <Route path='/dialogs/*' element={<Dialog person={props.data.messagesPage} dispatch={props.dispatch} />} />
+        <Route path='/profile' element={<Profile store={props.store} dispatch={props.dispatch} />} />
+        <Route path='/dialogs/*' element={<DialogsContainer store={props.store} dispatch={props.dispatch} />} />
         <Route path='/news' element={<News />} />
         <Route path='/music' element={<Music />} />
         <Route path='/settings' element={<Settings />} />

@@ -24,7 +24,7 @@ const profileReducer = (state = initialState, action) => {
          state.newPostText = ''
          return state 
       case UPDATE_POST_TEXT:
-         state.newPostText = action.text
+         state.newPostText = action.value
          return state
       default:
          return state
@@ -32,7 +32,7 @@ const profileReducer = (state = initialState, action) => {
  }
 
  export const viewPostActionCreator = () => ({ type: ADD_POST })
- export const changePostActionCreator = (text) => ({ type: UPDATE_POST_TEXT, text: text }) // ЕСЛИ ВОЗВРАЩАЕМ ОБЕКТ, НУЖНЫ КРУГЛЫЕ СКОБКИ
+ export const changePostActionCreator = (text) => ({ type: UPDATE_POST_TEXT, value: text }) // ЕСЛИ ВОЗВРАЩАЕМ ОБЕКТ, НУЖНЫ КРУГЛЫЕ СКОБКИ
  
  
  export default profileReducer

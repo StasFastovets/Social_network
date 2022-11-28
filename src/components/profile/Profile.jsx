@@ -1,13 +1,14 @@
 import Info from './info/Info';
-import Posts from './posts/Posts';
+import PostsContainer from './posts/Posts_container';
 import './Profile.css'
+
 
 const Profile = (props) => {
 
    return (
       <div className="profile">
          <Info />
-         <Posts post={props.post} dispatch={props.dispatch} />
+         <PostsContainer store={props.store} dispatch={props.dispatch} />
       </div>
    )
 }

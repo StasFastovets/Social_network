@@ -32,7 +32,7 @@ const dialogsReducer = (state = initialState, action) => {
          state.newMessageText = ''
          return state 
       case UPDATE_MESSAGE_TEXT:
-         state.newMessageText = action.text
+         state.newMessageText = action.value
          return state
       default:
          return state
@@ -41,7 +41,7 @@ const dialogsReducer = (state = initialState, action) => {
 
 
 export const viewMessageActionCreator = () => ({ type: ADD_MESSAGE })
-export const changeMessageActionCreator = (text) => ({ type: UPDATE_MESSAGE_TEXT, text: text })
+export const changeMessageActionCreator = (text) => ({ type: UPDATE_MESSAGE_TEXT, value: text })
 
 
 export default dialogsReducer
