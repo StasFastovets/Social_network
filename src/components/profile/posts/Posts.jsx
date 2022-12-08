@@ -7,7 +7,7 @@ import { changePostActionCreator, viewPostActionCreator } from '../../../redux/p
 // презентационная компонента не получает ничего лишнего, только данные и callback's
 const Posts = (props) => {
 
-   let postItems = props.posts.map(elem => <Post message={elem.message} likes={elem.likes} />);
+   let postItems = props.post.posts.map(elem => <Post message={elem.message} likes={elem.likes} />);
 
    let linkItem = React.createRef();
 
@@ -24,7 +24,7 @@ const Posts = (props) => {
       <div className={item.posts}>
          <p className={item.caption}>My posts</p>
          <div className={item.form}>
-            <textarea className={item.form_area} ref={linkItem} value={props.newPostText} onChange={onChangePost} />
+            <textarea className={item.form_area} ref={linkItem} value={props.post.newPostText} onChange={onChangePost} />
             <button className={item.form_button} onClick={onAddPost}>Send</button>
          </div>
          {postItems}

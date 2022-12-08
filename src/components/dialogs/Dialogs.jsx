@@ -6,8 +6,8 @@ import React from 'react';
 
 const Dialog = (props) => {
 
-   let personDataView = props.persons.map(item => <PersonItem name={item.name} id={item.id} />)
-   let messageDataView = props.messages.map(item => <MessageItem message={item.message} id={item.id} />)
+   let personDataView = props.dialogs.persons.map(item => <PersonItem name={item.name} id={item.id} />)
+   let messageDataView = props.dialogs.messages.map(item => <MessageItem message={item.message} id={item.id} />)
 
    let linkItem = React.createRef();
 
@@ -30,7 +30,7 @@ const Dialog = (props) => {
                {messageDataView}
             </div>
             <div className={item.form}>
-               <textarea className={item.text_area} ref={linkItem} value={props.newMessageText} onChange={onChangeMessage} />
+               <textarea className={item.text_area} ref={linkItem} value={props.dialogs.newMessageText} onChange={onChangeMessage} />
                <button className={item.button} onClick={onAddMessage}>View message</button>
             </div>
          </div>

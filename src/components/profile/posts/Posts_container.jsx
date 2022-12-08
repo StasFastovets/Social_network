@@ -2,22 +2,30 @@
 import React from 'react';
 import { changePostActionCreator, viewPostActionCreator } from '../../../redux/profile_reducer';
 import Posts from './Posts';
+import { connect } from 'react-redux';
+
 
 // контейнерная компонента это обертка для обычной компоненты
-const PostsContainer = (props) => {
-  
-   const viewPost = () => {
-      props.dispatch(viewPostActionCreator());
-   }
 
-   const changePost = (text) => {
-      let actionCreator = changePostActionCreator(text)
-      props.dispatch(actionCreator);
+let mapStateToProps = (state) => {
+   return {
+      post: state.profilePage
    }
-
-   return (
-      <Posts updateNewPostText={changePost} addPost={viewPost} posts={props.store.profilePage.posts} newPostText = {props.store.profilePage.newPostText}/>
-   )
 }
 
-export default PostsContainer;
+let mapDispatchToProps = (dispatch) => {
+   return {
+      updateNewPostText: (text) => {
+         let actionCreator = changePostActionCreator(text)
+         dispatch(actionCreator)
+      },
+      addPost: () => {
+         dispatch(viewPostActionCreator())
+      }
+   }
+}
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts)
+
+
+export default DialogsContainer;

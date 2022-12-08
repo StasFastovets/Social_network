@@ -8,11 +8,14 @@ let initialState = {
       { id: 2, message: 'I want to see you!', likes: 3 },
       { id: 3, message: 'How old are you?', likes: 2 },
       { id: 4, message: 'You are great person :)', likes: 1 },
- ],
- newPostText: 'Hi, how are your?',
+   ],
+   newPostText: 'Hi, how are your?',
 }
 
-const profileReducer = (state = initialState, action) => { 
+const profileReducer = (state = initialState, action) => {
+
+   let _state 
+
    switch (action.type) {
       case ADD_POST:
          let addOne = {
@@ -20,19 +23,22 @@ const profileReducer = (state = initialState, action) => {
             message: state.newPostText,
             likes: 0,
          }
-         state.posts.push(addOne)
-         state.newPostText = ''
-         return state 
+         _state = { ...state,
+                     posts: [...state.posts, addOne],
+                     newPostText: ''
+                  }
+         return _state
       case UPDATE_POST_TEXT:
-         state.newPostText = action.value
-         return state
+         _state = { ...state,
+            newPostText: action.value }
+         return _state
       default:
          return state
    }
- }
+}
 
- export const viewPostActionCreator = () => ({ type: ADD_POST })
- export const changePostActionCreator = (text) => ({ type: UPDATE_POST_TEXT, value: text }) // ЕСЛИ ВОЗВРАЩАЕМ ОБЕКТ, НУЖНЫ КРУГЛЫЕ СКОБКИ
- 
- 
- export default profileReducer
+export const viewPostActionCreator = () => ({ type: ADD_POST })
+export const changePostActionCreator = (text) => ({ type: UPDATE_POST_TEXT, value: text }) // ЕСЛИ ВОЗВРАЩАЕМ ОБЕКТ, НУЖНЫ КРУГЛЫЕ СКОБКИ
+
+
+export default profileReducer

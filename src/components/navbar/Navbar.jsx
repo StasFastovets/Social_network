@@ -9,6 +9,7 @@ const Navigation = () => {
             <li className={item.li}><NavLink className={itemData => itemData.isActive ? item.active : item.link} to="/dialogs">Messages</NavLink></li>
             <li className={item.li}><NavLink className={itemData => itemData.isActive ? item.active : item.link} to="/news">News</NavLink></li>
             <li className={item.li}><NavLink className={itemData => itemData.isActive ? item.active : item.link} to="/music">Music</NavLink></li>
+            <li className={item.li}><NavLink className={itemData => itemData.isActive ? item.active : item.link} to="/users">Users</NavLink></li>
             <li className={item.li}><NavLink className={itemData => itemData.isActive ? item.active : item.link} to="/settings">Settings</NavLink></li>
          </ul>
       </nav >
