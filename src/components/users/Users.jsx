@@ -1,10 +1,11 @@
 import React from 'react';
 import elem from './Users.module.css';
-import usersPhoto from "../../logo/images.jfif"
+import usersPhoto from "../../logo/images.jfif";
+import Preloader from './../common/preloader/preloader';
+
 
 
 const Users = (props) => {
-
    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)                        // количество страниц, ceil - округляет в большую сторону
    let pages = []                                                                         // массив страниц
    for (let i = 1; i <= 20; i++) {                                                        //  for (let i = 1; i <= pagesCount; i++) {        
@@ -15,6 +16,7 @@ const Users = (props) => {
       <div className={elem.body}>
          <div className={elem.container}>
             <div className={elem.caption}>Users</div>
+            <div className={elem.loader}>{props.isFetching ? <Preloader/> : null}</div>
             <div className={elem.pages}>{pages.map(p => {
                return <span onClick={() => props.onPageChanget(p)} className={props.currentPage === p ? elem.currentPage : elem.page}>{p}</span>
             })}</div>
