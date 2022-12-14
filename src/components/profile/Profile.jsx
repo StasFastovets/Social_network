@@ -1,13 +1,14 @@
 import Info from './info/Info';
 import PostsContainer from './posts/Posts_container';
-import './Profile.css'
+import elem from './Profile.module.css';
 
 
-const Profile = () => {
+
+const Profile = (props) => {
 
    return (
-      <div className="profile">
-         <Info />
+      <div className={elem.profile}>
+         <Info profile={props.profile}/>
          <PostsContainer />
       </div>
    )

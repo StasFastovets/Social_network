@@ -1,6 +1,7 @@
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT'
+const SET_USER_PROFILE = 'SET_USER_PROFILE'
 
 let initialState = {
    posts: [
@@ -10,6 +11,7 @@ let initialState = {
       { id: 4, message: 'You are great person :)', likes: 1 },
    ],
    newPostText: 'Hi, how are your?',
+   profile: null,
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -32,6 +34,10 @@ const profileReducer = (state = initialState, action) => {
          _state = { ...state,
             newPostText: action.value }
          return _state
+      case SET_USER_PROFILE:
+         _state = { ...state,
+            profile: action.profile }
+         return _state
       default:
          return state
    }
@@ -39,6 +45,6 @@ const profileReducer = (state = initialState, action) => {
 
 export const viewPostActionCreator = () => ({ type: ADD_POST })
 export const changePostActionCreator = (text) => ({ type: UPDATE_POST_TEXT, value: text }) // ЕСЛИ ВОЗВРАЩАЕМ ОБЕКТ, НУЖНЫ КРУГЛЫЕ СКОБКИ
-
+export const setUserProfileAC = (profile) => ({ type: SET_USER_PROFILE, profile })
 
 export default profileReducer

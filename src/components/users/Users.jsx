@@ -2,6 +2,7 @@ import React from 'react';
 import elem from './Users.module.css';
 import usersPhoto from "../../logo/images.jfif";
 import Preloader from './../common/preloader/preloader';
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -16,7 +17,7 @@ const Users = (props) => {
       <div className={elem.body}>
          <div className={elem.container}>
             <div className={elem.caption}>Users</div>
-            <div className={elem.loader}>{props.isFetching ? <Preloader/> : null}</div>
+            <div className={elem.loader}>{props.isFetching ? <Preloader /> : null}</div>
             <div className={elem.pages}>{pages.map(p => {
                return <span onClick={() => props.onPageChanget(p)} className={props.currentPage === p ? elem.currentPage : elem.page}>{p}</span>
             })}</div>
@@ -24,7 +25,9 @@ const Users = (props) => {
                {
                   props.users.map(item => <div className={elem.user} key={item.id}>
                      <div className={elem.info}>
-                        <img src={item.photos.small != null ? item.photos.small : usersPhoto} alt="smile" className={elem.img}></img>
+                        <NavLink to={'/profile/' + item.id}>
+                           <img src={item.photos.small != null ? item.photos.small : usersPhoto} alt="smile" className={elem.img}></img>
+                        </NavLink>
                         {item.followed ?
                            <button className={elem.button} onClick={() => props.followUser(item.id)}>FOLLOW</button> :
                            <button className={elem.button} onClick={() => props.unfollowUser(item.id)}>UNFOLLOW</button>}

@@ -32,4 +32,15 @@
    margin: 20px 0px 20px 0px;
  }
 
+ .info_job {
+  margin: 10px 0px 0px 0px;
+  font-weight: 700;
+ }
+
+ .info_job span {
+  margin: 0px 0px 0px 20px;
+ }
  
+ .info_jobDescription {
+  font-weight: 500;
+ }
