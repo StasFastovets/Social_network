@@ -3,10 +3,11 @@
   max-width: 1200px;
   margin: 10px auto;
   display: grid;
-  grid-template-rows: 50px 1fr;
+  grid-template-rows: 80px 1fr;
   grid-template-columns: 1fr 5fr;
   grid-template-areas: 
     'header header'
     'nav-bar content';
   grid-gap: 10px;
+  min-height: 100%;
 }

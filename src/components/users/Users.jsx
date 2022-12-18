@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom';
 const Users = (props) => {
    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)                        // количество страниц, ceil - округляет в большую сторону
    let pages = []                                                                         // массив страниц
-   for (let i = 1; i <= 20; i++) {                                                        //  for (let i = 1; i <= pagesCount; i++) {        
+   for (let i = 1; i <= pagesCount; i++) {                                                        //  for (let i = 1; i <= pagesCount; i++) {        
       pages.push(i)
    }
 
