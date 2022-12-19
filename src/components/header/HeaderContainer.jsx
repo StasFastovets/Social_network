@@ -29,7 +29,7 @@ class HeaderAPIContainer extends React.Component {
                })
                
             }
-         })
+         }) 
 
    }
 
