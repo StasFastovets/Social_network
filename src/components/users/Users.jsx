@@ -4,6 +4,7 @@ import usersPhoto from "../../logo/images.jfif";
 import Preloader from './../common/preloader/preloader';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import { deleteUnfollowUser, postFollowUser } from '../../API/api';
 
 
 const Users = (props) => {
@@ -31,10 +32,8 @@ const Users = (props) => {
                         {item.followed ?
                            <button className={elem.button} 
                               onClick={
-                                 () => {
-                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${item.id}`, { withCredentials: true }).
-                                    then(response => {
-                                       if (response.data.resultCode === 0) {
+                                 () => { deleteUnfollowUser(item.id).then(data => {
+                                       if (data.resultCode === 0) {
                                           props.unfollowUser(item.id)
                                        }
                                     })
@@ -43,10 +42,8 @@ const Users = (props) => {
                            >FOLLOW</button> :
                            <button className={elem.button} 
                               onClick={
-                                 () => {
-                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${item.id}`, {}, { withCredentials: true }).
-                                    then(response => {
-                                       if (response.data.resultCode === 0) {
+                                 () => { postFollowUser(item.id).then(data => {
+                                       if (data.resultCode === 0) {
                                           props.followUser(item.id)
                                        }
                                     })

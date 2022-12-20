@@ -5,6 +5,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import Header from './Header';
 import { setUserDataAC, setUserPhotoAC } from '../../redux/authReducer';
+import { getAuth, getProfileOfUser } from '../../API/api';
 
 
 class HeaderAPIContainer extends React.Component {
@@ -12,24 +13,22 @@ class HeaderAPIContainer extends React.Component {
       super(props)
    }
    componentDidMount() {
-      axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, { withCredentials: true })   //withCredentials - авторизация, подтверждаем что добавляем cookie к запросу
-         .then(response => {
-            if (response.data.resultCode === 0) {
-               let email = response.data.data.email
-               let id = response.data.data.id
-               let login = response.data.data.login
-               this.props.setAuthData(email, id, login)
+      getAuth().then( data => {
+         if (data.resultCode === 0) {
+            let email = data.data.email
+            let id = data.data.id
+            let login = data.data.login
+            this.props.setAuthData(email, id, login)
 
-               axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${response.data.data.id}`, { withCredentials: true })
-               .then(response => {
-                  if (response.data.photos.large != null) {
-                     let photo = response.data.photos.large
-                     this.props.setAuthUserPhoto(photo)
-                  }
-               })
+            getProfileOfUser(data.data.id).then(data => {
+               if (data.photos.large != null) {
+                  let photo = data.photos.large
+                  this.props.setAuthUserPhoto(photo)
+               }
+            })
                
-            }
-         }) 
+         }
+      }) 
 
    }
 

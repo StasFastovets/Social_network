@@ -5,6 +5,7 @@ import Users from './Users';
 import usersPhoto from "../../logo/images.jfif"
 import axios from 'axios';
 import elem from './Users.module.css';
+import { getUsers } from './../../API/api';
 
 
 class UsersAPIContainer extends React.Component {
@@ -14,20 +15,18 @@ class UsersAPIContainer extends React.Component {
 
    componentDidMount() {
       this.props.setIsFetching(true)
-      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, { withCredentials: true })
-         .then(response => {
-            this.props.addUsers(response.data.items)
-            this.props.setAllUsers(response.data.totalCount)
-            this.props.setIsFetching(false)
-         })
+      getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+         this.props.addUsers(data.items)
+         this.props.setAllUsers(data.totalCount)
+         this.props.setIsFetching(false)
+      })
    }
 
    onPageChanget = (page) => {
       this.props.setCurrentPage(page)
       this.props.setIsFetching(true)
-      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, { withCredentials: true }).
-         then(response => {
-            this.props.addUsers(response.data.items)
+      getUsers(page, this.props.pageSize).then(data => {
+            this.props.addUsers(data.items)
             this.props.setIsFetching(false)
          })
    }
