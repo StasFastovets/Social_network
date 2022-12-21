@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { followActionCreator, unfollowActionCreator, setUsersActionCreator, setCurrentPageActionCreator, setAllUsersActionCreator, setIsFetchingAC } from '../../redux/usersReducer';
+import { followActionCreator, unfollowActionCreator, setUsersActionCreator, setCurrentPageActionCreator, setAllUsersActionCreator, setIsFetchingAC, toggleFollowingProgressAC } from '../../redux/usersReducer';
 import Users from './Users';
 import usersPhoto from "../../logo/images.jfif"
 import axios from 'axios';
@@ -42,6 +42,8 @@ class UsersAPIContainer extends React.Component {
             followUser={this.props.followUser}
             unfollowUser={this.props.unfollowUser}
             isFetching={this.props.isFetching}
+            toggleFollowingProgress={this.props.toggleFollowingProgress}
+            followingInProgress={this.props.followingInProgress}
          />
       )
    }
@@ -54,6 +56,7 @@ let mapStateToProps = (state) => {
       totalUsersCount: state.usersPage.totalUsersCount,
       currentPage: state.usersPage.currentPage,
       isFetching: state.usersPage.isFetching,
+      followingInProgress: state.usersPage.followingInProgress,
    }
 
 }
@@ -83,9 +86,14 @@ let mapDispatchToProps = (dispatch) => {
       setIsFetching: (isFetching) => {
          let actionCreator = setIsFetchingAC(isFetching)
          dispatch(actionCreator)
+      },   
+      toggleFollowingProgress: (isFetching, userID) => {
+         let actionCreator = toggleFollowingProgressAC(isFetching, userID)
+         dispatch(actionCreator)
+         }
       }
    }
-}
+
 
 const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIContainer)
 

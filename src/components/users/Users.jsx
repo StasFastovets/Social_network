@@ -5,6 +5,7 @@ import Preloader from './../common/preloader/preloader';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { deleteUnfollowUser, postFollowUser } from '../../API/api';
+import { toggleFollowingAC } from './../../redux/usersReducer';
 
 
 const Users = (props) => {
@@ -30,22 +31,28 @@ const Users = (props) => {
                            <img src={item.photos.small != null ? item.photos.small : usersPhoto} alt="smile" className={elem.img}></img>
                         </NavLink>
                         {item.followed ?
-                           <button className={elem.button} 
-                              onClick={
-                                 () => { deleteUnfollowUser(item.id).then(data => {
+                           <button disabled={props.followingInProgress.some(id => id === item.id)} className={elem.button} 
+                              onClick= {
+                                 () => {    
+                                       props.toggleFollowingProgress(true, item.id)
+                                       deleteUnfollowUser(item.id).then(data => {
                                        if (data.resultCode === 0) {
-                                          props.unfollowUser(item.id)
-                                       }
-                                    })
-                                 } 
-                              }
+                                          props.unfollowUser(item.id)                                         
+                                          }
+                                       props.toggleFollowingProgress(false, item.id)
+                                       })
+                                    } 
+                                    }        
                            >FOLLOW</button> :
-                           <button className={elem.button} 
+                           <button disabled={props.followingInProgress.some(id => id === item.id)} className={elem.button} 
                               onClick={
-                                 () => { postFollowUser(item.id).then(data => {
+                                 () => { 
+                                       props.toggleFollowingProgress(true, item.id)
+                                       postFollowUser(item.id).then(data => {
                                        if (data.resultCode === 0) {
-                                          props.followUser(item.id)
+                                          props.followUser(item.id)                                         
                                        }
+                                       props.toggleFollowingProgress(false, item.id)
                                     })
                                  } 
                               }
