@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { followActionCreator, unfollowActionCreator, setUsersActionCreator, setCurrentPageActionCreator, setAllUsersActionCreator, setIsFetchingAC, toggleFollowingProgressAC } from '../../redux/usersReducer';
+import { followActionCreator, unfollowUserThunkCreator, setUsersActionCreator, setCurrentPageActionCreator, setAllUsersActionCreator, setIsFetchingAC, toggleFollowingProgressAC, getUsersThunkCreator, followUserThunkCreator, unfollowActionCreator } from '../../redux/usersReducer';
 import Users from './Users';
 import usersPhoto from "../../logo/images.jfif"
 import axios from 'axios';
@@ -14,21 +14,12 @@ class UsersAPIContainer extends React.Component {
    }
 
    componentDidMount() {
-      this.props.setIsFetching(true)
-      getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-         this.props.addUsers(data.items)
-         this.props.setAllUsers(data.totalCount)
-         this.props.setIsFetching(false)
-      })
+      this.props.getUsersThunk(this.props.currentPage, this.props.pageSize)
    }
 
    onPageChanget = (page) => {
       this.props.setCurrentPage(page)
-      this.props.setIsFetching(true)
-      getUsers(page, this.props.pageSize).then(data => {
-            this.props.addUsers(data.items)
-            this.props.setIsFetching(false)
-         })
+      this.props.getUsersThunk(page, this.props.pageSize)
    }
 
    render() {
@@ -44,6 +35,8 @@ class UsersAPIContainer extends React.Component {
             isFetching={this.props.isFetching}
             toggleFollowingProgress={this.props.toggleFollowingProgress}
             followingInProgress={this.props.followingInProgress}
+            unfollowUserThunk={this.props.unfollowUserThunk}
+            followUserThunk={this.props.followUserThunk}
          />
       )
    }
@@ -71,29 +64,24 @@ let mapDispatchToProps = (dispatch) => {
          let actionCreator = unfollowActionCreator(userID)
          dispatch(actionCreator)
       },
-      addUsers: (users) => {
-         let actionCreator = setUsersActionCreator(users)
-         dispatch(actionCreator)
-      },
       setCurrentPage: (page) => {
          let actionCreator = setCurrentPageActionCreator(page)
          dispatch(actionCreator)
       },
-      setAllUsers: (users) => {
-         let actionCreator = setAllUsersActionCreator(users)
+      unfollowUserThunk: (userID) => {
+         let actionCreator = unfollowUserThunkCreator(userID)
          dispatch(actionCreator)
       },
-      setIsFetching: (isFetching) => {
-         let actionCreator = setIsFetchingAC(isFetching)
+      getUsersThunk: (currentPage, pageSize) => {
+         let thunkCreator = getUsersThunkCreator(currentPage, pageSize)
+         dispatch(thunkCreator)
+      },
+      followUserThunk: (userID) => {
+         let actionCreator = followUserThunkCreator(userID)
          dispatch(actionCreator)
-      },   
-      toggleFollowingProgress: (isFetching, userID) => {
-         let actionCreator = toggleFollowingProgressAC(isFetching, userID)
-         dispatch(actionCreator)
-         }
-      }
+      },
    }
-
+}
 
 const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIContainer)
 

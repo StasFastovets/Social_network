@@ -4,7 +4,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import Header from './Header';
-import { setUserDataAC, setUserPhotoAC } from '../../redux/authReducer';
+import { AuthAC, setUserDataAC, setUserPhotoAC } from '../../redux/authReducer';
 import { getAuth, getProfileOfUser } from '../../API/api';
 
 
@@ -13,23 +13,7 @@ class HeaderAPIContainer extends React.Component {
       super(props)
    }
    componentDidMount() {
-      getAuth().then( data => {
-         if (data.resultCode === 0) {
-            let email = data.data.email
-            let id = data.data.id
-            let login = data.data.login
-            this.props.setAuthData(email, id, login)
-
-            getProfileOfUser(data.data.id).then(data => {
-               if (data.photos.large != null) {
-                  let photo = data.photos.large
-                  this.props.setAuthUserPhoto(photo)
-               }
-            })
-               
-         }
-      }) 
-
+      this.props.Auth()
    }
 
    render() {
@@ -50,14 +34,10 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
    return {
-      setAuthData: (email, id, login) => {
-         let actionCreator = setUserDataAC(email, id, login)
+      Auth: () => {
+         let actionCreator = AuthAC()
          dispatch(actionCreator)
-      },
-      setAuthUserPhoto: (photo) => {
-         let actionCreator = setUserPhotoAC(photo)
-         dispatch(actionCreator)
-      },
+      }
    }
 }
 

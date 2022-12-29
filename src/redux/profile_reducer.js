@@ -1,3 +1,4 @@
+import { getProfileOfUser } from './../API/api';
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT'
@@ -46,5 +47,15 @@ const profileReducer = (state = initialState, action) => {
 export const viewPostActionCreator = () => ({ type: ADD_POST })
 export const changePostActionCreator = (text) => ({ type: UPDATE_POST_TEXT, value: text }) // ЕСЛИ ВОЗВРАЩАЕМ ОБЕКТ, НУЖНЫ КРУГЛЫЕ СКОБКИ
 export const setUserProfileAC = (profile) => ({ type: SET_USER_PROFILE, profile })
+
+export const getProfileOfUserAC = (userID) => {
+   return (
+      (dispatch) => {
+         getProfileOfUser(userID).then(data => {
+            dispatch(setUserProfileAC(data))
+         })
+      }
+   )
+}
 
 export default profileReducer

@@ -32,33 +32,13 @@ const Users = (props) => {
                         </NavLink>
                         {item.followed ?
                            <button disabled={props.followingInProgress.some(id => id === item.id)} className={elem.button} 
-                              onClick= {
-                                 () => {    
-                                       props.toggleFollowingProgress(true, item.id)
-                                       deleteUnfollowUser(item.id).then(data => {
-                                       if (data.resultCode === 0) {
-                                          props.unfollowUser(item.id)                                         
-                                          }
-                                       props.toggleFollowingProgress(false, item.id)
-                                       })
-                                    } 
-                                    }        
+                              onClick= { () => {props.unfollowUserThunk(item.id)} }        
                            >FOLLOW</button> :
                            <button disabled={props.followingInProgress.some(id => id === item.id)} className={elem.button} 
-                              onClick={
-                                 () => { 
-                                       props.toggleFollowingProgress(true, item.id)
-                                       postFollowUser(item.id).then(data => {
-                                       if (data.resultCode === 0) {
-                                          props.followUser(item.id)                                         
-                                       }
-                                       props.toggleFollowingProgress(false, item.id)
-                                    })
-                                 } 
-                              }
+                              onClick={ () => {props.followUserThunk(item.id)} }
                            >UNFOLLOW</button>}
                      </div>
-                     <div className={elem.text}>
+                     <div className={elem.text}> 
                         <div className={elem.text_left}>
                            <div className={elem.name}>{item.name}</div>
                            <div className={elem.status}>{item.status}</div>

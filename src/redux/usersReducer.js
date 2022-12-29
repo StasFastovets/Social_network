@@ -1,3 +1,5 @@
+import { deleteUnfollowUser, getUsers, postFollowUser } from './../API/api';
+
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -57,10 +59,12 @@ const usersReducer = (state = initialState, action) => {
          _state = { ...state, isFetching: action.isFetching }
          return _state
       case TOGGLE_IS_FOLLOWING_PROGRESS:
-         _state = { ...state, 
+         _state = {
+            ...state,
             followingInProgress: action.isFetching ?
-            [...state.followingInProgress, action.userID] :
-            state.followingInProgress.filter(id => id != action.userID)}
+               [...state.followingInProgress, action.userID] :
+               state.followingInProgress.filter(id => id != action.userID)
+         }
          return _state
       default:
          return state
@@ -74,6 +78,47 @@ export const setUsersActionCreator = (users) => ({ type: SET_USER, users })
 export const setCurrentPageActionCreator = (page) => ({ type: SET_CURRENT_PAGE, page: page })
 export const setAllUsersActionCreator = (users) => ({ type: SET_ALL_USERS, users })
 export const setIsFetchingAC = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
-export const toggleFollowingProgressAC = (isFetching, userID) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userID})
+export const toggleFollowingProgressAC = (isFetching, userID) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userID })
+
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+   return (
+      (dispatch) => {
+         dispatch(setIsFetchingAC(true))
+         getUsers(currentPage, pageSize).then(data => {
+            dispatch(setUsersActionCreator(data.items))
+            dispatch(setAllUsersActionCreator(data.totalCount))
+            dispatch(setIsFetchingAC(false))
+         })
+      }
+   )
+}
+
+export const unfollowUserThunkCreator = (userID) => {
+   return (
+      (dispatch) => {
+         dispatch(toggleFollowingProgressAC(true, userID))
+         deleteUnfollowUser(userID).then(data => {
+         if (data.resultCode === 0) {
+            dispatch(unfollowActionCreator(userID))                                         
+            }
+            dispatch(toggleFollowingProgressAC(false, userID))
+         })
+      }
+   )
+}
+
+export const followUserThunkCreator = (userID) => {
+   return (
+      (dispatch) => {
+         dispatch(toggleFollowingProgressAC(true, userID))
+         postFollowUser(userID).then(data => {
+         if (data.resultCode === 0) {
+            dispatch(followActionCreator(userID))                                         
+            }
+            dispatch(toggleFollowingProgressAC(false, userID))
+         })
+      }
+   )
+}
 
 export default usersReducer

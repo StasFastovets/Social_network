@@ -2,7 +2,7 @@ import React from 'react';
 import Profile from './Profile'
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { setUserProfileAC } from './../../redux/profile_reducer';
+import { getProfileOfUserAC, setUserProfileAC } from './../../redux/profile_reducer';
 import { useParams } from 'react-router-dom';
 import { getProfileOfUser } from './../../API/api';
 
@@ -14,9 +14,10 @@ class ProfileAPIContainer extends React.Component {
 
    componentDidMount() {
       let userId = this.props.router.params.userId
-      getProfileOfUser(userId).then(data => {
-            this.props.setUserProfile(data)
-         })
+      if (!userId) {
+         userId = 2
+      }
+      this.props.getProfileOfUser(userId)
    }
 
    render() {
@@ -35,8 +36,8 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
    return {
-      setUserProfile: (profile) => {
-         let actionCreator = setUserProfileAC(profile)
+      getProfileOfUser: (userID) => {
+         let actionCreator = getProfileOfUserAC(userID)
          dispatch(actionCreator)
       },
    }
