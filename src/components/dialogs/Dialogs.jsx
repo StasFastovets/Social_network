@@ -2,9 +2,11 @@ import item from './Dialogs.module.css';
 import PersonItem from './persons/Persons';
 import MessageItem from './messages/Messages';
 import React from 'react';
+import Login from '../login/login';
+import { Navigate } from 'react-router-dom';
 
 
-const Dialog = (props) => {
+const Dialogs = (props) => {
 
    let personDataView = props.dialogs.persons.map(item => <PersonItem name={item.name} id={item.id} />)
    let messageDataView = props.dialogs.messages.map(item => <MessageItem message={item.message} id={item.id} />)
@@ -38,4 +40,4 @@ const Dialog = (props) => {
    )
 }
 
-export default Dialog;
+export default Dialogs;
