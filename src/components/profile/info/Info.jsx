@@ -1,15 +1,15 @@
 import item from './Info.module.css'
-import img from '../../../logo/phoneProfile.webp'
 import Preloader from './../../common/preloader/preloader';
+import ProfileStatus from './ProfileStatus';
 
 
 const Info = (props) => {
-   if(props.profile == null || props.profile == undefined) {
+   if (props.profile == null || props.profile == undefined) {
       return <Preloader />
-   } 
+   }
    return (
       <div className={item.content}>
-         <img className={item.img} src={img} alt="image"></img>
+         <ProfileStatus status='Hello my friends!' />
          <div className={item.info}>
             <img className={item.info_img} src={props.profile.photos.large} alt="#"></img>
             <div className={item.info_text}>

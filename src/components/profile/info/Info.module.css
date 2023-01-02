@@ -2,17 +2,27 @@
 .content {
    grid-area: content;
    display: grid;
-   grid-template-rows: 200px 1fr;
-   grid-template-areas: 'img' 'info';
+   grid-template-rows: 20px 1fr; 
+   grid-template-areas: 'status' 'info'; 
+   grid-template-rows: 1fr;
    grid-gap: 10px;
  }
 
- .img {
-   grid-area: img;
-   width: 100%;
-   height: 100%;
+ .status {
+   grid-area: status;
+   margin: 10px;
+   font-size: 20px;
+   display: grid;
+   justify-items: end;
  }
  
+ .status_top {
+
+}
+.status_buttom input {
+  font-size: 18px;
+}
+
  .info {
    grid-area: info;
    display: flex;
