@@ -5,9 +5,9 @@ import axios from 'axios';
 const instance = axios.create(
    {
       withCredentials: true,
-      headers: { "API-KEY": "85b23a82-f6b9-4427-a160-0dc849dfab88" },
+      headers: { "API-KEY": "3733710f-a079-4098-b86b-08f7856ef322" },
       baseURL: 'https://social-network.samuraijs.com/api/1.0/',             // URL с большой буквы
-   }       
+   }
 )
 
 export const getUsers = (currentPage, pageSize) => {
@@ -37,6 +37,24 @@ export const getProfileOfUser = (id) => {
    )
 }
 
+export const getStatusOfUser = (id) => {
+   return (
+      instance.get(`profile/status/${id}`)
+         .then(response => {
+            return response.data
+         })
+   )
+}
+
+export const updateStatusOfUser = (status) => {
+   return (
+      instance.put(`profile/status`, { status: status })
+         .then(response => {
+            return response.data
+         })
+   )
+}
+
 export const deleteUnfollowUser = (id) => {
    return (
       instance.delete(`follow/${id}`)
@@ -54,3 +72,4 @@ export const postFollowUser = (id) => {
          })
    )
 }
+

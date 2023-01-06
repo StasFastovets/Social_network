@@ -9,7 +9,7 @@ const Info = (props) => {
    }
    return (
       <div className={item.content}>
-         <ProfileStatus status='Hello my friends!' />
+         <ProfileStatus {...props} status={props.status} />
          <div className={item.info}>
             <img className={item.info_img} src={props.profile.photos.large} alt="#"></img>
             <div className={item.info_text}>

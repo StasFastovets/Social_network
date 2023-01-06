@@ -5,10 +5,9 @@ import elem from './Profile.module.css';
 
 
 const Profile = (props) => {
-
    return (
       <div className={elem.profile}>
-         <Info profile={props.profile}/>
+         <Info {...props} profile={props.profile}/>
          <PostsContainer />
       </div>
    )
