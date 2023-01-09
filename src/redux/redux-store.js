@@ -4,12 +4,14 @@ import dialogsReducer from './dialogs_reducer';
 import usersReducer from "./usersReducer";
 import authReducer from "./authReducer";
 import thunkMiddleware from "redux-thunk";      // промежуточный уровень
+import { reducer as formReducer } from 'redux-form'
 
 let reducers = combineReducers({
   profilePage: profileReducer,
   messagesPage: dialogsReducer,
   usersPage: usersReducer,
   auth: authReducer,
+  form: formReducer,
 })
 
 let store = legacy_createStore(reducers, applyMiddleware(thunkMiddleware))

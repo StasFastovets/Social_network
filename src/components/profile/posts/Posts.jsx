@@ -1,33 +1,34 @@
 import Post from './one_post/One_post';
-import item from './Posts.module.css'
+import s from './Posts.module.css'
 import React from 'react';
-import { changePostActionCreator, viewPostActionCreator } from '../../../redux/profile_reducer';
+import { Field, reduxForm } from 'redux-form';
 
 
-// презентационная компонента не получает ничего лишнего, только данные и callback's
+const PostForm = (props) => {
+   return (
+      <form className={s.form} onSubmit={props.handleSubmit}>
+         <Field className={s.form_area} component={'input'} name={'post'} placeholder='Hi, how are your?' type={'textarea'} />
+         <button className={s.form_button}>Send</button>
+      </form>
+   )
+}
+
+const PostReduxForm = reduxForm({ form: 'post' })(PostForm)
+
+
 const Posts = (props) => {
 
-   let postItems = props.post.posts.map(elem => <Post message={elem.message} likes={elem.likes} />);
+   let posts = props.post.posts.map(elem => <Post message={elem.message} likes={elem.likes} />);
 
-   let linkItem = React.createRef();
-
-   const onAddPost = () => {
-      props.addPost()
-   }
-
-   const onChangePost = () => {
-      let text = linkItem.current.value;
-      props.updateNewPostText(text);
+   const onSubmit = (formData) => {
+      props.addPost(formData.post)
    }
 
    return (
-      <div className={item.posts}>
-         <p className={item.caption}>My posts</p>
-         <div className={item.form}>
-            <textarea className={item.form_area} ref={linkItem} value={props.post.newPostText} onChange={onChangePost} />
-            <button className={item.form_button} onClick={onAddPost}>Send</button>
-         </div>
-         {postItems}
+      <div className={s.posts}>
+         <p className={s.caption}>My posts</p>
+         <PostReduxForm onSubmit={onSubmit} />
+         {posts}
       </div>
    )
 }

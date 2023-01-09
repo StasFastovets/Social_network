@@ -1,7 +1,6 @@
 import { getProfileOfUser, getStatusOfUser, updateStatusOfUser } from './../API/api';
 
 const ADD_POST = 'ADD-POST'
-const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
@@ -12,7 +11,6 @@ let initialState = {
       { id: 3, message: 'How old are you?', likes: 2 },
       { id: 4, message: 'You are great person :)', likes: 1 },
    ],
-   newPostText: 'Hi, how are your?',
    profile: null,
    status: '',
 }
@@ -25,19 +23,13 @@ const profileReducer = (state = initialState, action) => {
       case ADD_POST:
          let addOne = {
             id: 5,
-            message: state.newPostText,
+            message: action.post,
             likes: 0,
          }
          _state = {
             ...state,
             posts: [...state.posts, addOne],
             newPostText: ''
-         }
-         return _state
-      case UPDATE_POST_TEXT:
-         _state = {
-            ...state,
-            newPostText: action.value
          }
          return _state
       case SET_USER_PROFILE:
@@ -57,8 +49,7 @@ const profileReducer = (state = initialState, action) => {
    }
 }
 
-export const viewPostActionCreator = () => ({ type: ADD_POST })
-export const changePostActionCreator = (text) => ({ type: UPDATE_POST_TEXT, value: text }) // ЕСЛИ ВОЗВРАЩАЕМ ОБЕКТ, НУЖНЫ КРУГЛЫЕ СКОБКИ
+export const viewPostActionCreator = (post) => ({ type: ADD_POST, post })
 export const setUserProfileAC = (profile) => ({ type: SET_USER_PROFILE, profile })
 export const setStatusAC = (status) => ({ type: SET_STATUS, status })
 
