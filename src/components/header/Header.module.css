@@ -30,3 +30,8 @@
    border-radius: 50%;
    margin: 0px 0px 0px 20px;
 }
+.logout_link {
+   margin: 0px 0px 0px 50px;
+   background-color:  rgb(32, 247, 86);
+   border: none;
+}

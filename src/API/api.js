@@ -73,3 +73,20 @@ export const postFollowUser = (id) => {
    )
 }
 
+export const logIn = (email, password, rememberMe = false) => {
+   return (
+      instance.post(`auth/login`, {email,password,rememberMe})
+         .then(response => {
+            return response.data
+         })
+   )
+}
+
+export const logOut = () => {
+   return (
+      instance.delete(`auth/login`)
+         .then(response => {
+            return response.data
+         })
+   )
+}

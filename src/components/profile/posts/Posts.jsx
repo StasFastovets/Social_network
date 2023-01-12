@@ -2,12 +2,16 @@ import Post from './one_post/One_post';
 import s from './Posts.module.css'
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { maxLengthCreator, required } from '../../../utils/validators/validators';
 
+
+const maxLength10 = maxLengthCreator(10)
 
 const PostForm = (props) => {
    return (
       <form className={s.form} onSubmit={props.handleSubmit}>
-         <Field className={s.form_area} component={'input'} name={'post'} placeholder='Hi, how are your?' type={'textarea'} />
+         <Field className={s.form_area} component='input' name='post' placeholder='Hi, how are your?' type='Textarea'
+            validate={[required, maxLength10]} />
          <button className={s.form_button}>Send</button>
       </form>
    )

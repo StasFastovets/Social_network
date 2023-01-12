@@ -4,7 +4,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import Header from './Header';
-import { AuthAC, setUserDataAC, setUserPhotoAC } from '../../redux/authReducer';
+import { AuthAC, LogOutAC, setUserDataAC, setUserPhotoAC } from '../../redux/authReducer';
 import { getAuth, getProfileOfUser } from '../../API/api';
 
 
@@ -37,7 +37,11 @@ let mapDispatchToProps = (dispatch) => {
       Auth: () => {
          let actionCreator = AuthAC()
          dispatch(actionCreator)
-      }
+      },
+      LogOut: () => {
+         let actionCreator = LogOutAC()
+         dispatch(actionCreator)
+      },
    }
 }
 

@@ -1,5 +1,5 @@
-import { getAuth } from "../API/api"
-import { getProfileOfUser } from './../API/api';
+import { getAuth, logIn } from "../API/api"
+import { getProfileOfUser, logOut } from './../API/api';
 
 
 const SET_USER_DATA = 'SET_USER_DATA'
@@ -21,10 +21,10 @@ const authReducer = (state = initialState, action) => {
       case SET_USER_DATA:
          _state = {
             ...state,
-            email: action.data.email,
-            id: action.data.id,
-            login: action.data.login,
-            isAuth: true,
+            email: action.payload.email,
+            id: action.payload.id,
+            login: action.payload.login,
+            isAuth: action.payload.isAuth,
          }
          return _state
       case SET_USER_PHOTO:
@@ -39,28 +39,49 @@ const authReducer = (state = initialState, action) => {
 }
 
 
-export const setUserDataAC = (email, id, login) => ({ type: SET_USER_DATA, data: { email, id, login } })
+export const setUserDataAC = (email, id, login, isAuth) => ({ type: SET_USER_DATA, payload: { email, id, login, isAuth } })
 export const setUserPhotoAC = (photo) => ({ type: SET_USER_PHOTO, photo })
 
 export const AuthAC = () => {
    return (
       (dispatch) => {
-         getAuth().then( data => {
+         getAuth().then(data => {
             if (data.resultCode === 0) {
                let email = data.data.email
                let id = data.data.id
                let login = data.data.login
-               dispatch(setUserDataAC(email, id, login))
-   
+               dispatch(setUserDataAC(email, id, login, true))
+
                getProfileOfUser(data.data.id).then(data => {
                   if (data.photos.large != null) {
                      let photo = data.photos.large
                      dispatch(setUserPhotoAC(photo))
                   }
                })
-                  
+
             }
-         }) 
+         })
+      }
+   )
+}
+
+
+export const LogInAC = (login, password, rememberMe) => (dispatch) => {
+   logIn(login, password, rememberMe).then(
+      data => {
+         if (data.resultCode == 0) {
+            dispatch(AuthAC())
+         }
+      }
+   )
+}
+
+export const LogOutAC = () => (dispatch) => {
+   logOut().then(
+      data => {
+         if (data.resultCode == 0) {
+            dispatch(setUserDataAC(null, null, null, false))
+         }
       }
    )
 }

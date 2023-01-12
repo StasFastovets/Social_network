@@ -8,7 +8,7 @@ import { Field, reduxForm } from 'redux-form';
 const DialogsForm = (props) => {
    return (
       <form className={item.form} onSubmit={props.handleSubmit}>
-         <Field className={item.text_area} component={'input'} placeholder={'Enter your message'} name={'message'} type={'textarea'} />
+         <Field className={item.text_area} component='input' placeholder='Enter your message' name='message' type='textarea' />
          <button className={item.button}>View message</button>
       </form>
    )
