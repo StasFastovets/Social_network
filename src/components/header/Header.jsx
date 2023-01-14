@@ -12,7 +12,7 @@ const Header = (props) => {
                   <div>
                      <span className={s.login}> {props.login} </span>
                      <img className={s.photo} src={props.photo != null ? props.photo : userPhoto} alt=""></img>
-                     <button className={`${s.login_link} ${s.logout_link}`} onClick={props.LogOut}>LogOut</button>
+                     <button className={`${s.login_link} ${s.logout_link}`} onClick={props.LogOutAC}>LogOut</button>
                   </div> :
                   <NavLink className={s.login_link} to={'/Login'}>Login</NavLink>}
             </div>

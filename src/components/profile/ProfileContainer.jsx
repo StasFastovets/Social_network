@@ -15,6 +15,9 @@ class ProfileAPIContainer extends React.Component {
       let userId = this.props.router.params.userId
       if (!userId) {
          userId = this.props.authorizedUserID
+         if (!userId) {
+            this.props.history.push('/login')
+         }
       }
       this.props.getProfileOfUser(userId)
       this.props.getUserStatus(userId)
@@ -37,7 +40,6 @@ let mapStateToProps = (state) => {
       status: state.profilePage.status,
       authorizedUserID: state.auth.id,
    }
-
 }
 
 let mapDispatchToProps = (dispatch) => {
@@ -57,7 +59,7 @@ let mapDispatchToProps = (dispatch) => {
    }
 }
 
-function withRouter(Component) {
+export function withRouter(Component) {
    function ComponentWithRouterProp(props) {
       let params = useParams();
       return (

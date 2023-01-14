@@ -45,7 +45,7 @@ export const setUserPhotoAC = (photo) => ({ type: SET_USER_PHOTO, photo })
 export const AuthAC = () => {
    return (
       (dispatch) => {
-         getAuth().then(data => {
+         return getAuth().then(data => {
             if (data.resultCode === 0) {
                let email = data.data.email
                let id = data.data.id
