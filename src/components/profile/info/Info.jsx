@@ -1,6 +1,7 @@
 import item from './Info.module.css'
 import Preloader from './../../common/preloader/preloader';
 import ProfileStatus from './ProfileStatus';
+import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
 
 const Info = (props) => {
@@ -9,7 +10,7 @@ const Info = (props) => {
    }
    return (
       <div className={item.content}>
-         <ProfileStatus {...props} status={props.status} />
+         <ProfileStatusWithHooks {...props} status={props.status} />
          <div className={item.info}>
             <img className={item.info_img} src={props.profile.photos.large} alt="#"></img>
             <div className={item.info_text}>

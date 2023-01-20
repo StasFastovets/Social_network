@@ -5,6 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import { maxLengthCreator, required } from '../../../utils/validators/validators';
 
 
+
 const maxLength10 = maxLengthCreator(10)
 
 const PostForm = (props) => {
@@ -20,21 +21,47 @@ const PostForm = (props) => {
 const PostReduxForm = reduxForm({ form: 'post' })(PostForm)
 
 
-const Posts = (props) => {
+// class Posts extends PureComponent {
+//    constructor(props) {
+//       super(props)
+//    }
 
-   let posts = props.post.posts.map(elem => <Post message={elem.message} likes={elem.likes} />);
+// shouldComponentUpdate(nextProps, nextState) {
+//     return nextProps != this.props || nextState != this.state
+// }
+
+//    posts = this.props.post.map(elem => <Post message={elem.message} likes={elem.likes} />);
+
+//    onSubmit = (formData) => {
+//       this.props.addPost(formData.post)
+//    }
+
+//    render() {
+//       console.log('render')
+//       return (
+//          <div className={s.posts}>
+//             <p className={s.caption}>My posts</p>
+//             <PostReduxForm onSubmit={this.onSubmit} />
+//             {this.posts}
+//          </div>
+//       )
+//    }
+// }
+
+
+const Posts = React.memo((props) => {
+   let posts = props.post.map(elem => <Post message={elem.message} likes={elem.likes} />);
 
    const onSubmit = (formData) => {
       props.addPost(formData.post)
    }
-
-   return (
+    return (
       <div className={s.posts}>
          <p className={s.caption}>My posts</p>
          <PostReduxForm onSubmit={onSubmit} />
          {posts}
       </div>
    )
-}
+})
 
 export default Posts;
