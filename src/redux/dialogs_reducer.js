@@ -1,4 +1,4 @@
-const ADD_MESSAGE = 'ADD-MESSAGE'
+const ADD_MESSAGE = 'dialogs/ADD-MESSAGE'  // добавили dialogs, что-бы сделать уникальную строку и не было дублирования в приложении
 
 let initialState = {
    persons: [

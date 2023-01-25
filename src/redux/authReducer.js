@@ -2,8 +2,8 @@ import { getAuth, logIn } from "../API/api"
 import { getProfileOfUser, logOut } from './../API/api';
 
 
-const SET_USER_DATA = 'SET_USER_DATA'
-const SET_USER_PHOTO = 'SET_USER_PHOTO'
+const SET_USER_DATA = 'auth/SET_USER_DATA'
+const SET_USER_PHOTO = 'auth/SET_USER_PHOTO'
 
 let initialState = {
    email: null,
@@ -42,6 +42,40 @@ const authReducer = (state = initialState, action) => {
 export const setUserDataAC = (email, id, login, isAuth) => ({ type: SET_USER_DATA, payload: { email, id, login, isAuth } })
 export const setUserPhotoAC = (photo) => ({ type: SET_USER_PHOTO, photo })
 
+
+export const LogInAC = (login, password, rememberMe) => async (dispatch) => {
+   let response = await logIn(login, password, rememberMe)
+   if (response.resultCode == 0) {
+      dispatch(AuthAC())
+   }
+}
+
+export const LogOutAC = () => async (dispatch) => {
+   let response = await logOut()
+   if (response.resultCode == 0) {
+      dispatch(setUserDataAC(null, null, null, false))
+   }
+}
+
+// export const AuthAC = () => async (dispatch) => {
+//    let response = await getAuth()
+//     if (response.resultCode === 0) {
+//       let { email, id, login } = response.data
+//       dispatch(setUserDataAC(email, id, login, true))
+//    }
+
+//    let responseImg = await getProfileOfUser(response.data.id)
+//    if (responseImg.photos.large != null) {
+//       let photo = responseImg.photos.large
+//       dispatch(setUserPhotoAC(photo))
+//    }
+// }
+
+
+export default authReducer
+
+
+
 export const AuthAC = () => {
    return (
       (dispatch) => {
@@ -65,25 +99,12 @@ export const AuthAC = () => {
    )
 }
 
-
-export const LogInAC = (login, password, rememberMe) => (dispatch) => {
-   logIn(login, password, rememberMe).then(
-      data => {
-         if (data.resultCode == 0) {
-            dispatch(AuthAC())
-         }
-      }
-   )
-}
-
-export const LogOutAC = () => (dispatch) => {
-   logOut().then(
-      data => {
-         if (data.resultCode == 0) {
-            dispatch(setUserDataAC(null, null, null, false))
-         }
-      }
-   )
-}
-
-export default authReducer
+// export const LogOutAC = () => (dispatch) => {
+//    logOut().then(
+//       data => {
+//          if (data.resultCode == 0) {
+//             dispatch(setUserDataAC(null, null, null, false))
+//          }
+//       }
+//    )
+// }

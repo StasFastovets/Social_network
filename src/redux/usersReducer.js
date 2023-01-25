@@ -1,13 +1,13 @@
 import { deleteUnfollowUser, getUsers, postFollowUser } from './../API/api';
 
 
-const FOLLOW = 'FOLLOW'
-const UNFOLLOW = 'UNFOLLOW'
-const SET_USER = 'SET_USER'
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
-const SET_ALL_USERS = 'SET_ALL_USERS'
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
-const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
+const FOLLOW = 'users/FOLLOW'
+const UNFOLLOW = 'users/UNFOLLOW'
+const SET_USER = 'users/SET_USER'
+const SET_CURRENT_PAGE = 'users/SET_CURRENT_PAGE'
+const SET_ALL_USERS = 'users/SET_ALL_USERS'
+const TOGGLE_IS_FETCHING = 'users/TOGGLE_IS_FETCHING'
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'users/TOGGLE_IS_FOLLOWING_PROGRESS'
 
 let initialState = {
    users: [],
@@ -98,8 +98,8 @@ export const unfollowUserThunkCreator = (userID) => {
       (dispatch) => {
          dispatch(toggleFollowingProgressAC(true, userID))
          deleteUnfollowUser(userID).then(data => {
-         if (data.resultCode === 0) {
-            dispatch(unfollowActionCreator(userID))                                         
+            if (data.resultCode === 0) {
+               dispatch(unfollowActionCreator(userID))
             }
             dispatch(toggleFollowingProgressAC(false, userID))
          })
@@ -112,8 +112,8 @@ export const followUserThunkCreator = (userID) => {
       (dispatch) => {
          dispatch(toggleFollowingProgressAC(true, userID))
          postFollowUser(userID).then(data => {
-         if (data.resultCode === 0) {
-            dispatch(followActionCreator(userID))                                         
+            if (data.resultCode === 0) {
+               dispatch(followActionCreator(userID))
             }
             dispatch(toggleFollowingProgressAC(false, userID))
          })

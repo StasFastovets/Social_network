@@ -1,0 +1,12 @@
+
+.currentPage {
+   font-weight: bold;
+   padding: 0px 5px 0px 0px;
+}
+.page {
+   font-weight: normal;
+   padding: 0px 5px 0px 0px;
+}
+.pages {
+   margin: 10px;
+}

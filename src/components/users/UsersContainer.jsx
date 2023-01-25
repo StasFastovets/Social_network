@@ -2,9 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { followActionCreator, unfollowUserThunkCreator, setUsersActionCreator, setCurrentPageActionCreator, setAllUsersActionCreator, setIsFetchingAC, toggleFollowingProgressAC, getUsersThunkCreator, followUserThunkCreator, unfollowActionCreator } from '../../redux/usersReducer';
 import Users from './Users';
-import usersPhoto from "../../logo/images.jfif"
-import axios from 'axios';
-import elem from './Users.module.css';
 import { getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getfollowingInProgress, getUsersSuperSelector } from './../../redux/users_selectors';
 
 
@@ -54,7 +51,6 @@ class UsersAPIContainer extends React.Component {
 // }
 let mapStateToProps = (state) => {
    return {
-      // users: getUsers(state),
       users: getUsersSuperSelector(state),
       pageSize: getPageSize(state),
       totalUsersCount: getTotalUsersCount(state),

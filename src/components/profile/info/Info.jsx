@@ -4,22 +4,22 @@ import ProfileStatus from './ProfileStatus';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
 
-const Info = (props) => {
-   if (props.profile == null || props.profile == undefined) {
+const Info = ({profile, ...props}) => {
+   if (profile == null || profile == undefined) {
       return <Preloader />
    }
    return (
       <div className={item.content}>
          <ProfileStatusWithHooks {...props} status={props.status} />
          <div className={item.info}>
-            <img className={item.info_img} src={props.profile.photos.large} alt="#"></img>
+            <img className={item.info_img} src={profile.photos.large} alt="#"></img>
             <div className={item.info_text}>
-               <div className={item.info_top}>{props.profile.fullName}</div>
-               <div className={item.info_bottom}>{props.profile.aboutMe}</div>
+               <div className={item.info_top}>{profile.fullName}</div>
+               <div className={item.info_bottom}>{profile.aboutMe}</div>
                <div className={item.info_job}>Ищу ли я работу:
-                  {props.profile.lookingForAJob == true ? <span>Да</span> : <span>Нет</span>}
+                  {profile.lookingForAJob == true ? <span>Да</span> : <span>Нет</span>}
                </div>
-               <div className={item.info_jobDescription}>{props.profile.lookingForAJobDescription}</div>
+               <div className={item.info_jobDescription}>{profile.lookingForAJobDescription}</div>
             </div>
          </div>
       </div>
