@@ -10,7 +10,6 @@ import ProfileContainer from './components/profile/ProfileContainer';
 import HeaderContainer from './components/header/HeaderContainer';
 import Login from './components/login/login';
 import { Component } from 'react';
-import { AuthAC } from './redux/authReducer';
 import { connect } from 'react-redux';
 import { withRouter } from './components/profile/ProfileContainer'
 import { InitializeApp } from './redux/app_reducer';

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { followActionCreator, unfollowUserThunkCreator, setUsersActionCreator, setCurrentPageActionCreator, setAllUsersActionCreator, setIsFetchingAC, toggleFollowingProgressAC, getUsersThunkCreator, followUserThunkCreator, unfollowActionCreator } from '../../redux/usersReducer';
 import Users from './Users';
-import { getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getfollowingInProgress, getUsersSuperSelector } from './../../redux/users_selectors';
+import { getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getfollowingInProgress, getUsersSuperSelector, getPortionSize } from './../../redux/users_selectors';
 
 
 class UsersAPIContainer extends React.Component {
@@ -34,6 +34,7 @@ class UsersAPIContainer extends React.Component {
             followingInProgress={this.props.followingInProgress}
             unfollowUserThunk={this.props.unfollowUserThunk}
             followUserThunk={this.props.followUserThunk}
+            portionSize={this.props.portionSize}
          />
       )
    }
@@ -57,6 +58,7 @@ let mapStateToProps = (state) => {
       currentPage: getCurrentPage(state),
       isFetching: getIsFetching(state),
       followingInProgress: getfollowingInProgress(state),
+      portionSize: getPortionSize(state)
    }
 }
 

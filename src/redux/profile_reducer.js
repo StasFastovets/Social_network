@@ -13,6 +13,7 @@ let initialState = {
    ],
    profile: null,
    status: '',
+   newPostText: 'write something'
 }
 
 const profileReducer = (state = initialState, action) => {

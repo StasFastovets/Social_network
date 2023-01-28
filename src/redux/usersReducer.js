@@ -15,7 +15,8 @@ let initialState = {
    totalUsersCount: 0,            // количество всех пользователей, приходят из сервера 
    currentPage: 1,                // текущая страница
    isFetching: false,             // отображение полосы загрузки
-   followingInProgress: [],    // 
+   followingInProgress: [],       // 
+   portionSize: 10,               // количество порций(страничек)
 }
 
 const usersReducer = (state = initialState, action) => {
